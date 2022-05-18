@@ -1,26 +1,20 @@
 import { galleryItems } from './gallery-items.js';
 // Change code below this line
 
-// console.log(galleryItems);
-
-// console.log(createGalleryItemsMarkup(galleryItems))
-
 const galleryList = document.querySelector('.gallery');
 const ItemsMarkup = createGalleryItemsMarkup(galleryItems);
 
 galleryList.insertAdjacentHTML('beforeend', ItemsMarkup);
 
-galleryList.addEventListener('click', onImageItemClick)
-
 function createGalleryItemsMarkup(galleryItems) {
     return galleryItems
-        .map(({ original, description }) => {
+        .map(({ preview, original, description }) => {
         return `
     <div class="gallery__item">
         <a class="gallery__link" href="${original}">
             <img
             class="gallery__image"
-            src="small-image.jpg"
+            src="${preview}"
             data-source="${original}"
             alt="${description}"
             />
@@ -30,10 +24,14 @@ function createGalleryItemsMarkup(galleryItems) {
     }).join('');
 }
 
-// function onImageItemClick(evt) {
-//     if (!evt.target.classList.contains('gallery__image')) {
-//         return;
-//     }
-//     console.log(evt.target);
-// }
+galleryList.addEventListener('click', onImageItemClick);
 
+function onImageItemClick(evt) {
+    const instance = basicLightbox.create(`
+    <img src="${evt.target.original}" width="800" height="600">    
+`)
+
+    instance.show()
+    evt.stopPropagation();
+    
+}
