@@ -3,6 +3,7 @@ import { galleryItems } from './gallery-items.js';
 
 const galleryList = document.querySelector('.gallery');
 const ItemsMarkup = createGalleryItemsMarkup(galleryItems);
+const { preview, original, description } = galleryItems;
 
 galleryList.insertAdjacentHTML('beforeend', ItemsMarkup);
 
@@ -27,11 +28,17 @@ function createGalleryItemsMarkup(galleryItems) {
 galleryList.addEventListener('click', onImageItemClick);
 
 function onImageItemClick(evt) {
+    evt.preventDefault();
+    if (!evt.target.classList.contains('gallery__image')) {
+        return;
+    }
+
+    console.log(evt.target)
+
     const instance = basicLightbox.create(`
-    <img src="${evt.target.original}" width="800" height="600">    
+    <img src="${evt.target.dataset.source}" width="800" height="600">    
 `)
 
     instance.show()
-    evt.stopPropagation();
-    
+        
 }
