@@ -40,7 +40,16 @@ function onImageItemClick(evt) {
 `)
 
     instance.show()
+
+    galleryList.addEventListener('keydown', function (evt) {
+    if (evt.key === 'Escape') {
+        instance.close()
+    }
+});
         
 }
+
+
+
 
 

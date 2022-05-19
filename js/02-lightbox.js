@@ -31,7 +31,7 @@ var lightbox = new SimpleLightbox('.gallery a', { captionsData: "alt" });
     
 shown.simplelightbox
     
-var lightbox = new SimpleLightbox('.gallery a', { captionDelay: 250 });
+// var lightbox = new SimpleLightbox('.gallery a', { captionDelay: 250 });
 
     
 
