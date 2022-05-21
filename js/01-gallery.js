@@ -35,25 +35,25 @@ function onImageItemClick(evt) {
 
     console.log(evt.target)
 
+    const listenerFunc = function (evt) {
+        if (evt.key === 'Escape') {
+            instance.close()
+        }
+    }
+
     const instance = basicLightbox
-        .create(`<img src="${evt.target.dataset.source}" width="800" height="600">    
-` , { onShow: (instance) => {}, onClose: (instance) => {}})
+        .create(`<img src="${evt.target.dataset.source}" width="800" height="600">`,
+            {
+                onShow: (instance) => {
+                    galleryList.addEventListener('keydown', listenerFunc)
+                 },
+                onClose: (instance) => {
+                    galleryList.removeEventListener('keydown', listenerFunc)
+                }
+            })
     
     instance.show()
-
-    
-
-    galleryList.addEventListener('keydown', function (evt) {
-    if (evt.key === 'Escape') {
-        instance.close()
-    }
-});
-        
 }
-
-
-
-
 
 // import { galleryItems } from './gallery-items.js';
 // // Change code below this line
